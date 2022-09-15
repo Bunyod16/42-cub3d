@@ -33,35 +33,58 @@ int     find_map_x(char *map)
 	return (max);
 }
 
+int     find_map_y(char *map)
+{
+    int max;
+    int fd;
+    char *line;
+
+
+    fd = open(map, O_RDONLY);
+    line = get_next_line(fd);
+    max = 0;
+	while (line && ++max)
+	{
+		line = get_next_line(fd);
+	}
+	return (max);
+}
+
 void    init_layout(t_game *game, char *map)
 {
 	int		fd;
 	char	*line;
 	char	**layout;
 	int		i;
-    int     x;
 
-    x = find_map_x(map);
-    game->map.xlen = x;
+    game->map.xlen = find_map_x(map);
+    game->map.ylen = find_map_y(map);
     printf("%d\n", game->map.xlen);
-    exit (1);
+    printf("%d\n", game->map.ylen);
 	i = 0;
 	fd = open(map, O_RDONLY);
+	layout = malloc(sizeof(char *) * (game->map.ylen + 1));
 	line = get_next_line(fd);
-	// layout = malloc(sizeof(char *) * (y + 1));
 	while (line)
 	{
 		layout[i] = line;
-		i++;
 		line = get_next_line(fd);
+		i++;
 	}
 	layout[i] = NULL;
+	game->map.coord = layout;
+	i = 0;
+	while (game->map.coord[i])
+	{
+		printf("%s\n", game->map.coord[i]);
+		i++;
+	}
 }
 
 int main(int ac, char **av)
 {
     t_game game;
 
-    printf("ac %d", ac);
+    printf("ac %d\n", ac);
     init_layout(&game, av[1]);
 }
