@@ -14,7 +14,7 @@ INCLUDES = -Iincludes -Ilibft -Ignl -Imlx
 
 MAIN = cube3d.c 
 
-# SRC =
+SRC = init_map.c
 
 OBJ = ${SRC:.c=.o}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jking-ye <jking-ye@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: bunyodshams <bunyodshams@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:10:30 by jking-ye          #+#    #+#             */
-/*   Updated: 2022/09/15 14:37:32 by jking-ye         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:50:44 by bunyodshams      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,9 @@ typedef struct s_map
 	int		ylen;
 }	t_map;
 
-// typedef struct s_cartesian
-// {
-// 	t_coord		**coords;
-// 	int			xlen;
-// 	int			ylen;
-// }	t_cartesian;
-
-typedef struct s_data
+typedef struct game
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-
-typedef struct s_vars {
-	void		*mlx;
-	void		*win;
-	t_data		*img;
-	// t_cartesian	*chart;
-}	t_vars;
+	t_map	map;
+} t_game;
 
 #endif
