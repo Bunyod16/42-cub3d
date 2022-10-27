@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../includes/cube3d.h"
 #include <stdio.h>
-#include "libmlx/mlx.h"
+#include "../includes/mlx.h"
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>

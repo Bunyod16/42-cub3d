@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../includes/cube3d.h"
 #include <math.h>
 
 void	init_map_check_ray_dir(t_ray *ray, t_coord *map_check, t_map *map, t_fcoord *step)

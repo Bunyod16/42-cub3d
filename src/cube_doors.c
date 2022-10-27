@@ -10,24 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../includes/cube3d.h"
 #include <math.h>
 
 int	check_if_valid(t_map *map, int offset, char door, char axis)
 {
 	if (axis == 'x')
 	{
-		if (map->player->x + offset < map->xlen && map->player->y + offset < map->ylen)
+		if (map->player->x + offset < map->xlen
+			&& map->player->y + offset < map->ylen)
 		{
-			if (map->coord[(int)(map->player->y)][(int)(map->player->x + offset)] == door)
+			if (map->coord[(int)(map->player->y)] \
+				[(int)(map->player->x + offset)] == door)
 				return (1);
 		}
 	}
 	if (axis == 'y')
 	{
-		if (map->player->x + offset < map->xlen && map->player->y + offset < map->ylen)
+		if (map->player->x + offset < map->xlen
+			&& map->player->y + offset < map->ylen)
 		{
-			if (map->coord[(int)(map->player->y + offset)][(int)(map->player->x)] == door)
+			if (map->coord[(int)(map->player->y + offset)] \
+				[(int)(map->player->x)] == door)
 				return (1);
 		}
 	}
@@ -78,7 +82,7 @@ void	handledoors(t_map *map)
 {
 	static int	isclosed;
 
-	if (map->player->x - floor(map->player->x) >= 0.00001 
+	if (map->player->x - floor(map->player->x) >= 0.00001
 		&& map->player->y - floor(map->player->y) >= 0.00001)
 	{
 		if (isclosed == 0)

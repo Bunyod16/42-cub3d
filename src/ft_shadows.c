@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
-#include "libft/libft.h"
+#include "../includes/cube3d.h"
+#include "../includes/libft.h"
 #include <stdio.h>
 
 int	darken_int(int rgb, float percentage)

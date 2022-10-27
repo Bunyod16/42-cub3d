@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jking-ye <jking-ye@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: bshamsid <bshamsid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:34:57 by jking-ye          #+#    #+#             */
-/*   Updated: 2022/10/26 21:00:35 by jking-ye         ###   ########.fr       */
+/*   Updated: 2022/10/27 19:21:30 by bshamsid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
-# include "libft/libft.h"
-# include "libgnl/get_next_line.h"
-# include <stdio.h>
-# include <math.h>
-# include "libmlx/mlx.h"
-# include <float.h>
-# include <stdlib.h>
-# include <sys/time.h>
+#include "../includes/cube3d.h"
+#include "../includes/libft.h"
+#include "../includes/get_next_line.h"
+#include <stdio.h>
+#include <math.h>
+#include "../includes/mlx.h"
+#include <float.h>
+#include <stdlib.h>
+#include <sys/time.h>
 
-void	createScreen(t_map *map);
+void	create_screen(t_map *map);
 
 void	draw_player(t_map *map, int	x, int y)
 {
@@ -104,7 +104,7 @@ void	shoot_rays(t_map *map)
 	t_ray		*ray;
 
 	map->rays = malloc(sizeof(t_ray) * WIN_W);
-	angle = (map->player->angle) - (DR/16 * (WIN_W/2));
+	angle = (map->player->angle) - (DR / 16 * (WIN_W / 2));
 	if (angle < 0)
 		angle += 2 * PI;
 	else if (angle > 2 * PI)
@@ -115,21 +115,21 @@ void	shoot_rays(t_map *map)
 		map->rays[i] = init_ray(angle, map);
 		ray = map->rays[i];
 		init_map_check_ray_dir(ray, &map_check, map, &step);
-		calculate_intersection(ray, walk_shortest_path(ray, &map_check, &step, map));
+		calculate_intersection(ray, \
+			walk_shortest_path(ray, &map_check, &step, map));
 		angle = rotate_angle(angle);
 	}
-
 }
 
-void	createScreen(t_map *map)
+void	create_screen(t_map *map)
 {
-	int	y;
-	int x;
-	t_data img;
+	int		y;
+	int		x;
+	t_data	img;
 
 	img.img = mlx_new_image(map->mlx, WIN_W, WIN_H);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-				&img.line_length, &img.endian);
+			&img.line_length, &img.endian);
 	map->img = &img;
 	y = -1;
 	while (++y < map->ylen)
@@ -137,7 +137,8 @@ void	createScreen(t_map *map)
 		x = -1;
 		while (++x < map->xlen)
 		{
-			if (map->coord[y][x] == 'N' || map->coord[y][x] == 'S' || map->coord[y][x] == 'E' || map->coord[y][x] == 'W')
+			if (map->coord[y][x] == 'N' || map->coord[y][x] == 'S'
+				|| map->coord[y][x] == 'E' || map->coord[y][x] == 'W')
 			{
 				map->player->x = x + 0.5;
 				map->player->y = y + 0.5;
@@ -162,7 +163,7 @@ t_wall	changeframe(t_map *map)
 	static int	i;
 	static int	direction;
 	t_wall		frame;
-	
+
 	frame = map->hand[i];
 	if (direction == 0)
 	{
@@ -185,11 +186,10 @@ void	animatehand(t_map *map)
 {
 	static int	i;
 	static int	direction;
-	// t_wall		frame;
-	
-	// frame = changeframe(map);
-	// mlx_put_image_to_window(map->mlx, map->win, frame.wall, WIN_W - frame.wall_width, WIN_H - frame.wall_height + (i * 2));
-	mlx_put_image_to_window(map->mlx, map->win, map->knife.wall, WIN_W - map->knife.wall_width, WIN_H - map->knife.wall_height + (i * 2));
+
+	mlx_put_image_to_window(map->mlx, map->win, map->knife.wall,
+		WIN_W - map->knife.wall_width,
+		WIN_H - map->knife.wall_height + (i * 2));
 	if (direction == 0)
 	{
 		if (i < 20)
@@ -209,16 +209,16 @@ void	animatehand(t_map *map)
 
 int	render_screen(void *varg)
 {
-	t_map *map;
-	struct timeval tv;
-	int	color;
-	char *fps_str;
-	char *fps_num;
+	t_map			*map;
+	struct timeval	tv;
+	int				color;
+	char			*fps_str;
+	char			*fps_num;
 
 	gettimeofday(&tv, NULL);
 	map = (t_map *) varg;
 	mlx_clear_window(map->mlx, map->win);
-	createScreen(map);
+	create_screen(map);
 	animatehand(map);
 	map->fps = ((tv.tv_sec * 1000) + (tv.tv_usec / 1000)) - map->last_frame;
 	map->last_frame = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
@@ -231,10 +231,10 @@ int	render_screen(void *varg)
 		color = 0xFF0000;
 	fps_num = ft_itoa((float) 1000 / map->fps);
 	fps_str = ft_strjoin("fps :", fps_num);
-	mlx_string_put(map->mlx, map->win, 0 ,0, color, fps_str);
+	mlx_string_put(map->mlx, map->win, 0, 0, color, fps_str);
 	free(fps_num);
 	free(fps_str);
-	return 0;
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -252,19 +252,18 @@ int	main(int argc, char **argv)
 				&img.line_length, &img.endian);
 		map->img = &img;
 		get_textures(map);
-		createScreen(map);
+		create_screen(map);
 		map->last_frame = 0;
 		mlx_hook(map->win, 2, 0, deal_key, map);
 		mlx_hook(map->win, 6, 0, read_mouse, map);
 		mlx_loop_hook(map->mlx, render_screen, map);
-    	mlx_mouse_move(map->win, 100, 100);
+		mlx_mouse_move(map->win, 100, 100);
 		mlx_do_key_autorepeaton(map->mlx);
 		mlx_mouse_hide(map->mlx, map->win);
 		mlx_loop(map->mlx);
 	}
 	else
 	{
-		// free_map(map) TODO: free
 		return (0);
 	}
 }
