@@ -6,7 +6,7 @@
 /*   By: jking-ye <jking-ye@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 01:42:54 by bunyodshams       #+#    #+#             */
-/*   Updated: 2022/10/26 18:56:52 by jking-ye         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:46:58 by jking-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	get_textures(t_map *map)
 	map->hand[7].wall = mlx_xpm_file_to_image(&map->mlx, "./sprite-frames/frame-8.xpm", &map->hand[7].wall_width, &map->hand[7].wall_height);
 	map->hand[8].wall = mlx_xpm_file_to_image(&map->mlx, "./sprite-frames/frame-9.xpm", &map->hand[8].wall_width, &map->hand[8].wall_height);
 	map->hand[9].wall = mlx_xpm_file_to_image(&map->mlx, "./sprite-frames/frame-10.xpm", &map->hand[9].wall_width, &map->hand[9].wall_height);
-	map->knife.wall = mlx_xpm_file_to_image(&map->mlx, "./right-knife.xpm", &map->knife.wall_width, &map->knife.wall_height);
+	map->knife.wall = mlx_xpm_file_to_image(&map->mlx, "./textures/right-knife.xpm", &map->knife.wall_width, &map->knife.wall_height);
 	get_xpm_data(map, &map->wall_n, map->tex->wall_no_dir);
 	get_xpm_data(map, &map->wall_s, map->tex->wall_so_dir);
 	get_xpm_data(map, &map->wall_e, map->tex->wall_ea_dir);

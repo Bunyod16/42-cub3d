@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bshamsid <bshamsid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jking-ye <jking-ye@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:34:57 by jking-ye          #+#    #+#             */
-/*   Updated: 2022/10/27 19:21:30 by bshamsid         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:53:27 by jking-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,7 @@ void	create_screen(t_map *map)
 {
 	int		y;
 	int		x;
-	t_data	img;
-
-	img.img = mlx_new_image(map->mlx, WIN_W, WIN_H);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	map->img = &img;
+	
 	y = -1;
 	while (++y < map->ylen)
 	{
@@ -146,6 +141,7 @@ void	create_screen(t_map *map)
 			}
 		}
 	}
+	
 	shoot_rays(map);
 	render_background(map, WIN_W);
 	render_rays(map, WIN_W);

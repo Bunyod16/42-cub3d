@@ -1,4 +1,4 @@
-NAME = cube3d
+NAME = cub3d
 SOURCES = cube3d.c \
 			ft_cube_utils.c \
 			ft_shadows.c \
